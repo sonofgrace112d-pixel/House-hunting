@@ -1,0 +1,493 @@
+APARTMENT
+    David
+       RENTAL
+    }
+}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David Apartments | Quality Homes in Lagos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --light: #ecf0f1;
+            --dark: #1a252f;
+            --accent: #2ecc71;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--primary);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .menu-btn {
+            display: none;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 5%;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #2980b9;
+        }
+
+        /* Apartments Section */
+        .apartments {
+            padding: 4rem 5%;
+            background: var(--light);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 3rem;
+        }
+
+        .apartments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .apartment-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .apartment-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .apartment-img {
+            height: 200px;
+            background: var(--light);
+            overflow: hidden;
+        }
+
+        .apartment-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .apartment-card:hover .apartment-img img {
+            transform: scale(1.05);
+        }
+
+        .apartment-details {
+            padding: 1.5rem;
+        }
+
+        .apartment-name {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .apartment-features {
+            list-style: none;
+            margin: 1rem 0;
+            color: #7f8c8d;
+        }
+
+        .apartment-features li {
+            margin: 0.3rem 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .apartment-features li::before {
+            content: "✓";
+            color: var(--secondary);
+            margin-right: 0.5rem;
+        }
+
+        .price-tag {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin: 1rem 0;
+        }
+
+        .price-note {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Contact & Chat Section */
+        .contact {
+            padding: 4rem 5%;
+            background: var(--primary);
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Live Chat Widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 200;
+        }
+
+        .chat-toggle {
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .chat-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .chat-box {
+            display: none;
+            background: white;
+            width: 320px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            margin-bottom: 1rem;
+        }
+
+        .chat-box.active {
+            display: block;
+        }
+
+        .chat-header {
+            background: var(--accent);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-close {
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .chat-body {
+            height: 300px;
+            padding: 1rem;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .chat-message {
+            margin: 0.5rem 0;
+            padding: 0.8rem;
+            border-radius: 8px;
+            max-width: 80%;
+        }
+
+        .chat-bot {
+            background: var(--light);
+            color: var(--dark);
+            margin-right: auto;
+        }
+
+        .chat-user {
+            background: var(--accent);
+            color: white;
+            margin-left: auto;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid var(--light);
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid var(--light);
+            border-radius: 5px 0 0 5px;
+            outline: none;
+        }
+
+        .chat-input button {
+            padding: 0.8rem 1.2rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 5%;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                padding: 1rem 5%;
+                flex-direction: column;
+            }
+
+            .nav-links a {
+                margin: 0.8rem 0;
+                display: block;
+            }
+
+            .menu-btn {
+                display: block;
+                cursor: pointer;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .chat-widget {
+                bottom: 1rem;
+                right: 1rem;
+            }
+
+            .chat-box {
+                width: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">DAVID</div>
+        <div class="menu-btn" id="menuBtn">&#9776;</div>
+        <div class="nav-links" id="navLinks">
+            <a href="#home">Home</a>
+            <a href="#apartments">Our Apartments</a>
+            <a href="#contact">Contact Us</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>David Apartments</h1>
+        <p>Premium, comfortable homes in prime locations across Lagos – where quality meets affordability.</p>
+        <a href="#apartments" class="btn">View Our Apartments</a>
+    </section>
+
+    <!-- Apartments Section (EASY TO UPDATE!) -->
+    <section class="apartments" id="apartments">
+        <h2 class="section-title">Our Apartments</h2>
+        <div class="apartments-grid" id="apartmentsContainer">
+            <!-- ============================== -->
+            <!-- HOW TO ADD MORE APARTMENTS: -->
+            <!-- 1. Copy the entire .apartment-card block below -->
+            <!-- 2. Paste it inside this .apartments-grid container -->
+            <!-- 3. Update all details (image, name, features, price) -->
+            <!-- ============================== -->
+
+            <!-- Apartment 1 -->
+            <div class="apartment-card">
+                <div class="apartment-img">
+                    <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="1 Bedroom Apartment">
+                </div>
+                <div class="apartment-details">
+                    <h3 class="apartment-name">1 Bedroom Executive</h3>
+                    <ul class="apartment-features">
+                        <li>45 sqm Living Space</li>
+                        <li>Fully Fitted Kitchen</li>
+                        <li>En-suite Bathroom</li>
+                        <li>24/7 Security</li>
+                        <li>Free Wi-Fi</li>
+                    </ul>
+                    <div class="price-tag">₦1,200,000 / annum</div>
+                    <p class="price-note">Inclusive of utility charges (except electricity)</p>
+                    <button class="btn" onclick="openChatWithQuery('Enquiry about 1 Bedroom Executive apartment')">Enquire Now</button>
+                </div>
+            </div>
+
+            <!-- Apartment 2 -->
+            <div class="apartment-card">
+                <div class="apartment-img">
+                    <img src="https://images.unsplash.com/photo-1560409479-22a9c6cf0968?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="2 Bedroom Apartment">
+                </div>
+                <div class="apartment-details">
+                    <h3 class="apartment-name">2 Bedroom Deluxe</h3>
+                    <ul class="apartment-features">
+                        <li>75 sqm Living Space</li>
+                        <li>Modern Kitchen with Island</li>
+                        <li>2 En-suite Bathrooms</li>
+                        <li>Car Parking Space</li>
+                        <li>Swimming Pool Access</li>
+                    </ul>
+                    <div class="price-tag">₦2,500,000 / annum</div>
+                    <p class="price-note">Inclusive of all utility charges</p>
+                    <button class="btn" onclick="openChatWithQuery('Enquiry about 2 Bedroom Deluxe apartment')">Enquire Now</button>
+                </div>
+            </div>
+
+            <!-- Apartment 3 -->
+            <div class="apartment-card">
+                <div class="apartment-img">
+                    <img src="https://images.unsplash.com/photo-1558705116-490a111d6457?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="3 Bedroom Apartment">
+                </div>
+                <div class="apartment-details">
+                    <h3 class="apartment-name">3 Bedroom Penthouse</h3>
+                    <ul class="apartment-features">
+                        <li>120 sqm Living Space</li>
+                        <li>Walk-in Closets</li>
+                        <li>3 En-suite Bathrooms</li>
+                        <li>Private Balcony</li>
+                        <li>Gym & Concierge Service</li>
+                    </ul>
+                    <div class="price-tag">₦4,800,000 / annum</div>
+                    <p class="price-note">Includes 2 parking spaces & maintenance</p>
+                    <button class="btn" onclick="openChatWithQuery('Enquiry about 3 Bedroom Penthouse apartment')">Enquire Now</button>
+                </div>
+            </div>
+
+            <!-- ============================== -->
+            <!-- PASTE NEW APARTMENT CARDS HERE -->
+            <!-- ============================== -->
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2>Ready to Make David Your Home?</h2>
+        <p>Reach out to our team for viewings, bookings or any questions you may have.</p>
+        <button class="btn" onclick="openChat()">Live Chat With Us</button>
+        <p style="margin-top: 1rem;">Or call us: <strong>+234 80X XXX XXXX</strong></p>
+    </section>
+
+    <!-- Live Chat Widget -->
+    <div class="chat-widget">
+        <div class="chat-box" id="chatBox">
+            <div class="chat-header">
+                <h3>David Apartments Support</h3>
+                <span class="chat-close" id="chatClose">&times;</span>
+            </div>
+            <div class="chat-body" id="chatBody">
+                <div class="chat-message chat-bot">Hello! 👋 Welcome to David Apartments. How can we help you today?</div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Type your message...">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+        <div class="chat-toggle" id="chatToggle">&#128172;</div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 David Apartments. All Rights Reserved. | Located in Lagos, Nigeria</p>
+    </footer>
+
+    <script>
+        //
